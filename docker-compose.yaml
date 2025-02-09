@@ -12,6 +12,7 @@ services:
         # RAILS_SERVE_STATIC_FILES: 'true'
     image: chatwoot:3.16.0
     env_file: .env ## Change this file for customized env variables
+    restart: always
     volumes:
       - /home/techiterian/Documents/applications/chatwoot:/app/storage
     networks:
@@ -30,6 +31,7 @@ services:
       - INSTALLATION_ENV=docker
     entrypoint: docker/entrypoints/rails.sh
     command: ['bundle', 'exec', 'rails', 's', '-p', '3000', '-b', '0.0.0.0']
+    restart: always
     networks:
       - cbnet
 
@@ -45,6 +47,7 @@ services:
       - RAILS_ENV=production
       - INSTALLATION_ENV=docker
     command: ['bundle', 'exec', 'sidekiq', '-C', 'config/sidekiq.yml']
+    restart: always
     networks:
       - cbnet
       
